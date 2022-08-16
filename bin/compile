@@ -25,7 +25,9 @@ APP_BASE="$(cat "${ENV_DIR}/APP_BASE")"
     mv "${BUILD_DIR}"/yarn.lock "${STAGE}/$(basename "$APP_BASE")" &&
     cd "${STAGE}/$(basename "$APP_BASE")" && yarn install --mode update-lockfile && cd - &&
     rm -rf "${BUILD_DIR}"/* &&
-    mv "${STAGE}/$(basename "$APP_BASE")"/* "${BUILD_DIR}"
+    mv "${STAGE}/$(basename "$APP_BASE")"/* "${BUILD_DIR}" &&
+    ls "${BUILD_DIR}" &&
+    cat "${BUILD_DIR}"/yarn.lock
 )
 
 if [ $? -ne 0 ]; then
