@@ -20,10 +20,10 @@ APP_BASE="$(cat "${ENV_DIR}/APP_BASE")"
 
 (
     mv "${BUILD_DIR}/${APP_BASE}" "${STAGE}" &&
+    # From b2c/before-install.sh - Copy yarn files
     cp -R "${BUILD_DIR}"/.yarn "${STAGE}/$(basename "$APP_BASE")"/.yarn &&
     cp "${BUILD_DIR}"/.yarnrc.yml "${STAGE}/$(basename "$APP_BASE")" &&
     mv "${BUILD_DIR}"/yarn.lock "${STAGE}/$(basename "$APP_BASE")" &&
-    cd "${STAGE}/$(basename "$APP_BASE")" && yarn install --mode update-lockfile && cd - &&
     rm -rf "${BUILD_DIR}"/* &&
     mv "${STAGE}/$(basename "$APP_BASE")"/* "${BUILD_DIR}" &&
     ls "${BUILD_DIR}" &&
