@@ -20,6 +20,9 @@ APP_BASE="$(cat "${ENV_DIR}/APP_BASE")"
 
 (
     mv "${BUILD_DIR}/${APP_BASE}" "${STAGE}" &&
+    cp -R "${BUILD_DIR}"/.yarn "${STAGE}/$(basename "$APP_BASE")"/.yarn &&
+    cp "${BUILD_DIR}"/.yarnrc.yml "${STAGE}/$(basename "$APP_BASE")" &&
+    mv "${BUILD_DIR}"/yarn.lock "${STAGE}/$(basename "$APP_BASE")" &&
     rm -rf "${BUILD_DIR}"/* &&
     mv "${STAGE}/$(basename "$APP_BASE")"/* "${BUILD_DIR}"
 )
@@ -30,4 +33,3 @@ if [ $? -ne 0 ]; then
 fi
 
 echo "Copied ${APP_BASE} to root of app successfully" | indent
-
