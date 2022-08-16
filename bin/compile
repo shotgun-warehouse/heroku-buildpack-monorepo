@@ -25,9 +25,7 @@ APP_BASE="$(cat "${ENV_DIR}/APP_BASE")"
     cp "${BUILD_DIR}"/.yarnrc.yml "${STAGE}/$(basename "$APP_BASE")" &&
     mv "${BUILD_DIR}"/yarn.lock "${STAGE}/$(basename "$APP_BASE")" &&
     rm -rf "${BUILD_DIR}"/* &&
-    mv "${STAGE}/$(basename "$APP_BASE")"/* "${BUILD_DIR}" &&
-    ls "${BUILD_DIR}" &&
-    cat "${BUILD_DIR}"/yarn.lock
+    mv "${STAGE}/$(basename "$APP_BASE")"/* "${BUILD_DIR}"
 )
 
 if [ $? -ne 0 ]; then
